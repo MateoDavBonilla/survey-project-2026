@@ -10,12 +10,18 @@ import { SurveyService } from '../../services/survey.service';
 })
 export class ResultsComponent implements OnInit {
   results: any[] = [];
-
+  comments: any[] = [];
+  loadingComments = true;
   constructor(private surveyService: SurveyService) {}
 
   ngOnInit(): void {
     this.surveyService.getResults().subscribe((data) => {
       this.results = data;
+    });
+
+    this.surveyService.getComments().subscribe((data) => {
+      this.comments = data;
+      this.loadingComments = false;
     });
   }
 

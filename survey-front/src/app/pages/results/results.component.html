@@ -20,7 +20,7 @@
                                 {{ r.question }}
                             </td>
                             <td *ngFor="let v of [1,2,3,4,5]">
-                                <span >
+                                <span>
                                     {{ getCount(r.results, v) }}
                                 </span>
                             </td>
@@ -35,4 +35,35 @@
 
         </div>
     </div>
+    <!-- COMENTARIOS ADICIONALES -->
+    <div class="mt-5">
+        <h4 class="mb-4">Comentarios adicionales</h4>
+
+        <div *ngIf="loadingComments" class="text-muted">
+            Cargando comentarios...
+        </div>
+
+        <div *ngIf="!loadingComments && comments.length === 0" class="alert alert-info">
+            No se han registrado comentarios adicionales.
+        </div>
+
+        <div class="row" *ngIf="comments.length > 0">
+            <div class="col-md-6 col-lg-4 mb-4" *ngFor="let c of comments">
+
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{ c.comment }}
+                        </p>
+                    </div>
+
+                    <div class="card-footer text-muted small">
+                        {{ c.createdAt | date:'medium' }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>

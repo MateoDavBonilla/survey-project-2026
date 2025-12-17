@@ -9,7 +9,10 @@ export class SurveyService {
   private apiUrl = 'http://localhost:5201/api/surveys';
 
   constructor(private http: HttpClient) {}
-
+  
+  getComments() {
+    return this.http.get<any[]>(`${this.apiUrl}/comments`);
+  }
   getQuestions(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/questions`);
   }

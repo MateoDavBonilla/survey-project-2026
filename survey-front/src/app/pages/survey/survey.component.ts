@@ -28,7 +28,7 @@ export class SurveyComponent implements OnInit {
 
       const controls: any = {};
       qs.forEach((q) => (controls[q.id] = ['', Validators.required]));
-
+      controls['comment'] = [''];
       this.form = this.fb.group(controls);
     });
   }
@@ -36,12 +36,19 @@ export class SurveyComponent implements OnInit {
   submit(): void {
     if (this.form.invalid) return;
 
-    const answers = Object.keys(this.form.value).map((key) => ({
-      questionId: Number(key),
-      value: this.form.value[key],
-    }));
+    const answers = Object.keys(this.form.value)
+      .filter((key) => key !== 'comment')
+      .map((key) => ({
+        questionId: Number(key),
+        value: this.form.value[key],
+      }));
 
-    this.surveyService.submitSurvey({ answers }).subscribe(() => {
+    const payload = {
+      answers,
+      comment: this.form.value.comment,
+    };
+
+    this.surveyService.submitSurvey(payload).subscribe(() => {
       this.showModal = true;
     });
   }
