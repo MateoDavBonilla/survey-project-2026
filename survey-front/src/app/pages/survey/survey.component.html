@@ -1,0 +1,79 @@
+<div class="container mt-5 mb-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h3 class="card-title mb-4">
+                Encuesta de Clima del Equipo
+            </h3>
+
+            <p class="text-muted mb-4">
+                Responde las siguientes preguntas usando una escala del 1 al 5.
+            </p>
+
+            <form *ngIf="form" [formGroup]="form" (ngSubmit)="submit()">
+
+                <div *ngFor="let q of questions; index as i" class="mb-4">
+                    <div class="fw-semibold mb-2">
+                        {{ i + 1 }}. {{ q.text }}
+                    </div>
+
+                    <div class="d-flex gap-3">
+                        <div *ngFor="let v of [1,2,3,4,5]" class="form-check">
+                            <input class="form-check-input" type="radio" [value]="v" [formControlName]="q.id"
+                                [id]="'q' + q.id + 'v' + v" />
+                            <label class="form-check-label" [for]="'q' + q.id + 'v' + v">
+                                {{ v }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <button class="btn btn-success px-4" [disabled]="form.invalid">
+                        Enviar encuesta
+                    </button>
+                </div>
+            </form>
+
+            <div *ngIf="submitted" class="alert alert-success mt-4">
+                ✅ Encuesta enviada correctamente
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- MODAL -->
+<div *ngIf="showModal" class="modal-backdrop fade show"></div>
+
+
+<div *ngIf="showModal" class="modal fade show d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Encuesta enviada</h5>
+                <button type="button" class="btn-close" (click)="showModal = false"></button>
+            </div>
+
+            <div class="modal-body">
+                <p class="mb-0">
+                    ✅ Gracias por completar la encuesta.
+                    <br />
+                    Tus respuestas fueron registradas correctamente.
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" (click)="showModal = false">
+                    Seguir respondiendo
+                </button>
+
+                <a routerLink="/results" class="btn btn-primary" (click)="showModal = false">
+                    Ver resultados
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

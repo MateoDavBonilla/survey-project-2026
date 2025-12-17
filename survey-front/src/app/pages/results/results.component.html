@@ -1,0 +1,38 @@
+<div class="container mt-5 mb-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <h3 class="card-title mb-4">
+                Resultados de la Encuesta
+            </h3>
+
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle text-center">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th class="text-start">Preguntas</th>
+                            <th *ngFor="let v of [1,2,3,4,5]">{{ v }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let r of results">
+                            <td class="text-start fw-semibold">
+                                {{ r.question }}
+                            </td>
+                            <td *ngFor="let v of [1,2,3,4,5]">
+                                <span >
+                                    {{ getCount(r.results, v) }}
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div *ngIf="results.length === 0" class="alert alert-info mt-3">
+                ℹ️ Aún no existen respuestas registradas.
+            </div>
+
+        </div>
+    </div>
+</div>
