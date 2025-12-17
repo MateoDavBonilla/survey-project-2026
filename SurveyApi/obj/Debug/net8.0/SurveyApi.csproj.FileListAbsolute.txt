@@ -35,3 +35,4 @@ D:\mateo\proyecto 2026\Survey\SurveyApi\obj\Debug\net8.0\refint\SurveyApi.dll
 D:\mateo\proyecto 2026\Survey\SurveyApi\obj\Debug\net8.0\SurveyApi.pdb
 D:\mateo\proyecto 2026\Survey\SurveyApi\obj\Debug\net8.0\SurveyApi.genruntimeconfig.cache
 D:\mateo\proyecto 2026\Survey\SurveyApi\obj\Debug\net8.0\ref\SurveyApi.dll
+D:\mateo\proyecto 2026\Survey\SurveyApi\obj\Debug\net8.0\SurveyApi.sourcelink.json

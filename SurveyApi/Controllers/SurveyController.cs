@@ -6,6 +6,7 @@ namespace SurveyApi.Controllers;
 
 [ApiController]
 [Route("api/surveys")]
+
 public class SurveyController : ControllerBase
 {
     private readonly AppDbContext _context;
@@ -28,7 +29,10 @@ public class SurveyController : ControllerBase
         if (request.Answers == null || !request.Answers.Any())
             return BadRequest("No answers provided");
 
-        var survey = new Survey();
+        var survey = new Survey
+        {
+            Comment = request.Comment
+        };
 
         foreach (var answer in request.Answers)
         {
@@ -93,5 +97,21 @@ public class SurveyController : ControllerBase
             .ToList();
 
         return Ok(questions);
+    }
+
+    [HttpGet("comments")]
+    public IActionResult GetComments()
+    {
+        var comments = _context.Surveys
+            .Where(s => !string.IsNullOrWhiteSpace(s.Comment))
+            .OrderByDescending(s => s.CreatedAt)
+            .Select(s => new
+            {
+                s.Comment,
+                s.CreatedAt
+            })
+            .ToList();
+
+        return Ok(comments);
     }
 }
